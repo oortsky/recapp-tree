@@ -2,13 +2,11 @@ export default function Page() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto bg-card shadow-sm rounded-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          Terms of Service
-        </h1>
+        <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
 
-        <div className="space-y-6 text-gray-700">
+        <div className="space-y-6 ">
           <section>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm mb-4">
               Last updated:{" "}
               {new Date().toLocaleDateString("id-ID", {
                 year: "numeric",
@@ -143,10 +141,7 @@ export default function Page() {
             <p>
               If you have any questions about these Terms of Service, please
               contact us at{" "}
-              <a
-                href="mailto:axara.dev@proton.me"
-                className="hover:underline"
-              >
+              <a href="mailto:axara.dev@proton.me" className="hover:underline">
                 axara.dev@proton.com
               </a>
             </p>
