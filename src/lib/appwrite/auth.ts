@@ -53,8 +53,8 @@ export const signIn = async (): Promise<void> => {
   try {
     await account.createOAuth2Session({
       provider: OAuthProvider.Google,
-      success: `${window.location.origin}/dashboard`,
-      failure: `${window.location.origin}/failed`
+      success: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
+      failure: `${process.env.NEXT_PUBLIC_BASE_URL}/failed`
     });
   } catch (error) {
     console.error("[AppwriteAuth] Sign-in failed:", {
