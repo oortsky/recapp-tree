@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recapp - Productivity Report
 
-## Getting Started
+![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-First, run the development server:
+## 📋 Overview
+
+Recapp is a comprehensive productivity recording and reporting tool designed specifically for workers in the rubber home industry. The application streamlines the process of tracking, recording, and analyzing worker productivity, enabling better management and performance insights.
+
+## ✨ Features
+
+- **Worker Productivity Tracking** - Record and monitor daily productivity metrics
+- **Comprehensive Reporting** - Generate detailed productivity reports
+- **User-Friendly Interface** - Simple and intuitive design for easy data entry
+- **Data Analytics** - Visualize productivity trends and patterns
+- **Export Capabilities** - Export reports in multiple formats
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+### Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/oortsky/recapp-tree.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd recapp-tree
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Install dependencies
 
-## Learn More
+```bash
+# Add your installation command
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the application
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Add your run command
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💻 Usage
 
-## Deploy on Vercel
+1. **Register Workers** - Add worker profiles to the system
+2. **Record Productivity** - Enter daily productivity data for each worker
+3. **Generate Reports** - Create and view comprehensive productivity reports
+4. **Analyze Data** - Review trends and performance metrics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p align="center">
+  <img src="public/screenshots/img1.png" width="170"/>
+  <img src="public/screenshots/img2.png" width="170"/>
+</p>
+
+## 🛠️ Built With
+
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js">
+<img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+<img src="https://img.shields.io/badge/ShadCN/UI-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="ShadCN UI">
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+<img src="https://img.shields.io/badge/Appwrite-E4405F?style=for-the-badge&logo=appwrite&logoColor=white" alt="Appwrite">
+
+## 📊 Project Structure
+
+```
+recapp/
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── contexts/
+│   ├── db/
+│   ├── hooks/
+│   └── lib/
+├── public/
+└── README.md
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors
+
+- **Bayu Aprio Pamungkas** - _Full-Stack Developer_ - [OORTSKY](https://github.com/oortsky)
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped with this project
+
+## 📞 Contact
+
+Project Link: [https://github.com/oortsky/recapp-tree](https://github.com/oortsky/recapp-tree)
+
+---
+
+Made with ❤️ by OORTSKY
