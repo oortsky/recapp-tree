@@ -8,7 +8,7 @@ import { Fab } from "@/components/fab";
 
 export default function Page() {
   return (
-    <section className="w-full flex flex-col gap-5 pt-[84px] pb-[120px] px-4">
+    <section className="w-full flex flex-col gap-5 pt-[84px] pb-4 px-4">
       <TimeVisual />
       <Greeting />
       <RevenueCard />
