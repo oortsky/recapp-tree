@@ -33,23 +33,12 @@ interface MoreButtonProps {
 }
 
 export function MoreButton({ mode, item_id }: MoreButtonProps) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
 
-  const handleEdit = () => {
-    setDropdownOpen(false);
-    setDrawerOpen(true);
-  };
-
-  const handleDelete = () => {
-    setDropdownOpen(false);
-    setAlertOpen(true);
-  };
-
   return (
     <>
-      <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
@@ -63,7 +52,7 @@ export function MoreButton({ mode, item_id }: MoreButtonProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-52">
           <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={handleEdit}>
+            <DropdownMenuItem onSelect={() => setDrawerOpen(true)}>
               <SquarePen className="mr-2 size-4" />
               Edit
             </DropdownMenuItem>
@@ -71,7 +60,7 @@ export function MoreButton({ mode, item_id }: MoreButtonProps) {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem
-              onSelect={handleDelete}
+              onSelect={() => setAlertOpen(true)}
               className="text-destructive focus:text-destructive"
             >
               <Trash2Icon className="mr-2 size-4" />
