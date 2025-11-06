@@ -6,9 +6,11 @@ import {
   ColumnDef,
   VisibilityState,
   ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   useReactTable,
   OnChangeFn
 } from "@tanstack/react-table";
@@ -335,8 +337,16 @@ function TableRecap<TData, TValue>({
   columnFilters,
   setColumnFilters
 }: TableRecapProps<TData, TValue>) {
+  const sortedData = React.useMemo(() => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return dateA - dateB;
+    });
+  }, [data]);
+
   const table = useReactTable({
-    data: data as TData[],
+    data: sortedData as TData[],
     columns,
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters as OnChangeFn<ColumnFiltersState>,

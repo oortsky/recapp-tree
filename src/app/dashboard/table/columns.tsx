@@ -38,7 +38,7 @@ export const columns: ColumnDef<Recap>[] = [
       const date = new Date(dateValue as string);
       const formatted = date.toLocaleDateString("id-ID");
       return <div className="text-center font-medium">{formatted}</div>;
-    }
+    },
   },
   {
     accessorKey: "revenue",
