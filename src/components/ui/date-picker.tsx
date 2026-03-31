@@ -70,7 +70,6 @@ export function DatePicker({
             onChange?.(date);
             setOpen(false);
           }}
-          disabled={{ dayOfWeek: [0] }}
         />
       </PopoverContent>
     </Popover>
