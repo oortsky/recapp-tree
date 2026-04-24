@@ -64,7 +64,6 @@ export function PeriodPicker({ period, onPeriodChange }: PeriodPickerProps) {
           defaultMonth={period?.from}
           selected={period}
           onSelect={handleDateChange}
-          disabled={{ dayOfWeek: [0] }}
           captionLayout="dropdown"
           className="rounded-lg border-0 shadow-none"
           min={1}
