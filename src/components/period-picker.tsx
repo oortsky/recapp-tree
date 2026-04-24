@@ -67,7 +67,7 @@ export function PeriodPicker({ period, onPeriodChange }: PeriodPickerProps) {
           captionLayout="dropdown"
           className="rounded-lg border-0 shadow-none"
           min={1}
-          max={31}
+          max={35}
           required
         />
       </PopoverContent>
