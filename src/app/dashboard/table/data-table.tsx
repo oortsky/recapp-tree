@@ -298,7 +298,7 @@ export function DataTable<TData, TValue>({
                 <TableRecap
                   key={key}
                   columns={columns}
-                  data={recaps}
+                  data={recaps as Recap[]}
                   typeLabel={finalLabel}
                   typeValue={finalValue}
                   columnVisibility={columnVisibility}

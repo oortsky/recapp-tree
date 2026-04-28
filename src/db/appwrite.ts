@@ -181,7 +181,7 @@ async function deleteType(typeId: string): Promise<boolean> {
 async function createRecap(recapData: RecapCreateData): Promise<RecapProps> {
   try {
     const typeId = recapData.type_id;
-    
+
     if (!typeId || typeof typeId !== "string") {
       throw new Error("Invalid type_id after update");
     }
@@ -225,7 +225,7 @@ async function getAllRecaps(queries: string[] = []): Promise<RecapProps[]> {
       COLLECTIONS.RECAPS,
       queries
     );
-    
+
     const types = await getAllTypes();
     const typesMap: Record<string, TypeProps> = {};
     types.forEach(type => {
@@ -382,16 +382,30 @@ async function getRecapsByUserPeriodGroupedByType(
   endDate: string
 ): Promise<Record<string, RecapProps[]>> {
   try {
-    const response = await databases.listDocuments<RecapDocument>(
-      DATABASE_ID,
-      COLLECTIONS.RECAPS,
-      [
-        Query.equal("user_id", userId),
-        Query.greaterThanEqual("date", startDate),
-        Query.lessThanEqual("date", endDate),
-        Query.orderDesc("date")
-      ]
-    );
+    // Pagination loop
+    const allDocuments: RecapDocument[] = [];
+    let offset = 0;
+    const limit = 100;
+
+    while (true) {
+      const response = await databases.listDocuments<RecapDocument>(
+        DATABASE_ID,
+        COLLECTIONS.RECAPS,
+        [
+          Query.equal("user_id", userId),
+          Query.greaterThanEqual("date", startDate),
+          Query.lessThanEqual("date", endDate),
+          Query.orderDesc("date"),
+          Query.limit(limit),
+          Query.offset(offset),
+        ]
+      );
+
+      allDocuments.push(...response.documents);
+
+      if (offset + response.documents.length >= response.total) break;
+      offset += limit;
+    }
 
     const types = await getAllTypes();
     const typesMap: Record<string, TypeProps> = {};
@@ -399,30 +413,23 @@ async function getRecapsByUserPeriodGroupedByType(
       typesMap[type.id] = type;
     });
 
-    const recaps = response.documents.map(doc => ({
-      id: doc.$id,
-      user_id: doc.user_id,
-      amount: doc.amount,
-      type: typesMap[doc.type_id] || null,
-      date: doc.date,
-      revenue: doc.revenue
-    }));
-
     const groupedRecaps: Record<string, RecapProps[]> = {};
 
-    recaps.forEach(recap => {
-      if (recap.type) {
-        const typeLabel = recap.type.label;
-        if (!groupedRecaps[typeLabel]) {
-          groupedRecaps[typeLabel] = [];
-        }
-        groupedRecaps[typeLabel].push(recap);
-      } else {
-        if (!groupedRecaps["Uncategorized"]) {
-          groupedRecaps["Uncategorized"] = [];
-        }
-        groupedRecaps["Uncategorized"].push(recap);
+    allDocuments.forEach(doc => {
+      const recap: RecapProps = {
+        id: doc.$id,
+        user_id: doc.user_id,
+        amount: doc.amount,
+        type: typesMap[doc.type_id] || null,
+        date: doc.date,
+        revenue: doc.revenue
+      };
+
+      const typeLabel = recap.type ? recap.type.label : "Uncategorized";
+      if (!groupedRecaps[typeLabel]) {
+        groupedRecaps[typeLabel] = [];
       }
+      groupedRecaps[typeLabel].push(recap);
     });
 
     return groupedRecaps;
@@ -504,20 +511,31 @@ async function getTotalRevenueByUserByPeriod(
   endDate: string
 ): Promise<number> {
   try {
-    const response = await databases.listDocuments<RecapDocument>(
-      DATABASE_ID,
-      COLLECTIONS.RECAPS,
-      [
-        Query.equal("user_id", userId),
-        Query.greaterThanEqual("date", startDate),
-        Query.lessThanEqual("date", endDate)
-      ]
-    );
+    let total = 0;
+    let offset = 0;
+    const limit = 100;
 
-    const total = response.documents.reduce(
-      (sum, doc) => sum + (doc.revenue || 0),
-      0
-    );
+    while (true) {
+      const response = await databases.listDocuments<RecapDocument>(
+        DATABASE_ID,
+        COLLECTIONS.RECAPS,
+        [
+          Query.equal("user_id", userId),
+          Query.greaterThanEqual("date", startDate),
+          Query.lessThanEqual("date", endDate),
+          Query.limit(limit),
+          Query.offset(offset)
+        ]
+      );
+
+      total += response.documents.reduce(
+        (sum, doc) => sum + (doc.revenue || 0),
+        0
+      );
+
+      if (offset + response.documents.length >= response.total) break;
+      offset += limit;
+    }
 
     return total;
   } catch (error) {
